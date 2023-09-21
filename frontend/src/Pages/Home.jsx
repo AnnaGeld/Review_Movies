@@ -2,12 +2,13 @@
 import heroImg01 from "../assets/images/barbie.png";
 import heroImg02 from "../assets/images/wakanda.png";
 import heroImg03 from "../assets/images/heimer.png";
+import heroImg04 from "../assets/images/dino1.png";
 
 
 
 
 
-import DoctorsList from "./Doctors/DoctorsList";
+import MoviesList from "./Movies/MoviesList";
 
 import Testimonial from "../Components/Testimonial/Testimonial";
 import useTitle from "../Hooks/useTitle";
@@ -58,11 +59,13 @@ const Home = () => {
             <div className="flex gap-[10px]  justify-start">
               <div>
                 <img src={heroImg01} alt=" " className="w-full rounded p-[10px] " />
+               
               </div>
-              <div className="mt-[0px] ">
-                <img src={heroImg02} alt=" " className="w-full mb-[10px] rounded" />
-                <img src={heroImg03} alt=" " className="w-full mb-[10px] rounded" />
-                <img src={heroImg03} alt=" " className="w-full rounded " />
+              <div className="mt-[0px]  ">
+                <img src={heroImg02} alt=" " className="w-full p-[10px] rounded-md" />
+                <img src={heroImg03} alt=" " className="w-full p-[10px] rounded" />
+                 <img src={heroImg04} alt=" " className="w-44 p-[10px] rounded " />
+                
               </div>
             </div>
           </div>
@@ -89,7 +92,7 @@ const Home = () => {
             <h2 className="heading text-center pt-6">Popular Movies</h2>
             
           </div>
-          <DoctorsList />
+          <MoviesList />
         </div>
       </section>
 

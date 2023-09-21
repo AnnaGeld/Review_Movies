@@ -1,15 +1,15 @@
-import doctorImg01 from "../src/assets/images/barbie.png";
-import doctorImg02 from "../src/assets/images/extraction.png";
-import doctorImg03 from "../src/assets/images/rebel.png";
+import Img01 from "../src/assets/images/barbie.png";
+import Img02 from "../src/assets/images/extraction.png";
+import Img03 from "../src/assets/images/rebel.png";
 
-export const doctors = [
+export const movies = [
   {
     id: "01",
     name: "Barbie",
     specialty: "Movie",
     avgRating: 4.8,
     totalRating: 272,
-    photo: doctorImg01,
+    photo: Img01,
 
     date: "23 June, 2023",
     education: "Comedy",
@@ -23,7 +23,7 @@ export const doctors = [
     specialty: "Movie",
     avgRating: 4.8,
     totalRating: 272,
-    photo: doctorImg02,
+    photo: Img02,
     date: "2023",
 
     education: "Action",
@@ -36,7 +36,7 @@ export const doctors = [
     specialty: "Movie",
     avgRating: 4.8,
     totalRating: 272,
-    photo: doctorImg03,
+    photo: Img03,
 
     date: "2023",
     education: "epic space opera",

@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { doctors } from "../../../data/doctors.js";
+import { movies } from "../../../data/movies.js";
 import starIcon from "../../assets/images/Star.png";
-import DoctorAbout from "./DoctorAbout.jsx";
+import MoviesAbout from "./MoviesAbout.jsx";
 import Feedback from "./Feedback.jsx";
 
 
-const DoctorsDetails = () => {
+const MoviesDetails = () => {
   const { id } = useParams();
-  const [doctor, setDoctor] = useState(null);
+  const [movie, setMovie] = useState(null);
   const [tab, setTab] = useState("about");
 
   useEffect(() => {
-    const selectedDoctor = doctors.find((doc) => doc.id === id);
-    setDoctor(selectedDoctor);
+    const selectMovie = movies.find((doc) => doc.id === id);
+    setMovie(selectMovie);
   }, [id]);
 
-  if (!doctor) {
+  if (!movie) {
     return <div>Loading...</div>; // Return a loading indicator if data is not yet available
   }
 
@@ -28,7 +28,7 @@ const DoctorsDetails = () => {
     photo,
 
     short,
-  } = doctor;
+  } = movie;
 
   return (
     <section className="bg-black pt-6 ">
@@ -84,9 +84,9 @@ const DoctorsDetails = () => {
               </button>
             </div>
             <div className="mt-[50px]">
-              {tab === "about" && <DoctorAbout doctor={doctor} />}
+              {tab === "about" && <MoviesAbout movie={movie} />}
 
-              {tab === "feedback" && <Feedback doctor={doctor} />}
+              {tab === "feedback" && <Feedback movie={movie} />}
             </div>
           </div>
           
@@ -96,4 +96,4 @@ const DoctorsDetails = () => {
   );
 };
 
-export default DoctorsDetails;
+export default MoviesDetails;

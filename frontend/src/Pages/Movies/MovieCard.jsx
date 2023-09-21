@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import starIcon from "../../assets/images/Star.png";
 import { BsArrowRight } from "react-icons/bs";
 // eslint-disable-next-line react/prop-types
-const DoctorCard = ({ doctor }) => {
+const MovieCard = ({ movie }) => {
   const {
     id,
     name,
@@ -11,9 +11,8 @@ const DoctorCard = ({ doctor }) => {
     avgRating,
     totalRating,
     photo,
-    totalPatients,
-    hospital,
-  } = doctor;
+    
+  } = movie;
   return (
     <div className=" pt-6 bg-black p-3 lg:p-5">
       <div>
@@ -43,7 +42,7 @@ const DoctorCard = ({ doctor }) => {
          
         </div>
         <Link
-          to={`/doctors/${id}`}
+          to={`/movies/${id}`}
           className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] flex items-center justify-center group hover:bg-primaryColor hover:border-none "
         >
           <BsArrowRight className="text-white w-6 h-5" />
@@ -53,4 +52,4 @@ const DoctorCard = ({ doctor }) => {
   );
 };
 
-export default DoctorCard;
+export default MovieCard;

@@ -6,13 +6,11 @@ import {
   getSingleUser,
 } from "../controllers/userController.js";
 
-import { authenticate, restrict } from "../auth/verifyToken.js";
-
 const router = express.Router();
 
-router.get("/:id", authenticate, restrict(["patient"]), getSingleUser); // Protected route
-router.get("/", authenticate, restrict(["admin"]), getAllUser); // Public route
-router.put("/:id", authenticate, restrict(["patient"]), updateUser); // Protected route
-router.delete("/:id", authenticate, restrict(["patient"]), deleteUser); // Protected route
+router.get("/:id", getSingleUser); // Protected route
+router.get("/", getAllUser); // Public route
+router.put("/:id", updateUser); // Protected route
+router.delete("/:id", deleteUser); // Protected route
 
 export default router;

@@ -1,7 +1,7 @@
 import Testimonial from "../../Components/Testimonial/Testimonial";
-import { doctors } from ".././../../data/doctors.js";
-import DoctorCard from "./DoctorCard";
-const Doctors = () => {
+import { movies } from "../../../data/movies.js";
+import MovieCard from "./MovieCard";
+const Movies = () => {
   return (
     <>
       <section className="  bg-black">
@@ -27,8 +27,8 @@ const Doctors = () => {
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 flex 
           "
           >
-            {doctors.map((doctor) => (
-              <DoctorCard key={doctor.id} doctor={doctor} />
+            {movies.map((movie) => (
+              <MovieCard key={movie.id} movie={movie} />
             ))}
           </div>
         </div>
@@ -49,4 +49,4 @@ const Doctors = () => {
   );
 };
 
-export default Doctors;
+export default Movies;

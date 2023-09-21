@@ -1,3 +1,4 @@
+import "./style/Header.css"
 import logo from '../assets/images/logo.png';
 import userImg from '../assets/images/avatar-icon.png';
 import { Link, NavLink } from 'react-router-dom';
@@ -9,7 +10,7 @@ const navLinks = [
     display: 'Home',
   },
   {
-    path: '/doctors',
+    path: '/movies',
     display: 'Find a Movie',
   },
  
@@ -89,7 +90,7 @@ const Header = () => {
               </button>
             </Link>
             <span className="md:hidden" onClick={toggleMenu}>
-              <BiMenu className="w-6 h-6 cursor-pointer" />
+              <BiMenu className="w-6 h-6 cursor-pointer text-white" />
             </span>
           </div>
         </div>
