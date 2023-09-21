@@ -15,7 +15,7 @@ export const movies = [
     education: "Comedy",
 
     short:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, alias!",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, alias!!",
   },
   {
     id: "02",
