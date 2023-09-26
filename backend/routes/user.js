@@ -1,16 +1,25 @@
 import express from "express";
 import {
-  updateUser,
   deleteUser,
   getAllUser,
   getSingleUser,
+  updateUser,
 } from "../controllers/userController.js";
+
+import { verifyAdmin, verifyUser } from "../utilis/verifyToken.js";
 
 const router = express.Router();
 
-router.get("/:id", getSingleUser); // Protected route
-router.get("/", getAllUser); // Public route
-router.put("/:id", updateUser); // Protected route
-router.delete("/:id", deleteUser); // Protected route
+//Update user
+router.put("/:id", verifyUser, updateUser);
+
+//Delete user
+router.delete("/:id", verifyUser, deleteUser);
+
+//Get single user
+router.get("/:id", verifyUser, getSingleUser);
+
+//Get all user
+router.get("/", verifyAdmin, getAllUser);
 
 export default router;

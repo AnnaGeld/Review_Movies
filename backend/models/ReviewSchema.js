@@ -2,9 +2,13 @@ import mongoose from "mongoose";
 
 const reviewSchema = new mongoose.Schema(
   {
-    user: {
+    productId: {
       type: mongoose.Types.ObjectId,
-      ref: "User",
+      ref: "Movie",
+    },
+    username: {
+      type: String,
+      required: true,
     },
     reviewText: {
       type: String,
@@ -20,18 +24,5 @@ const reviewSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-reviewSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: "user",
-    select: "name photo",
-  });
-
-  next();
-});
-
-reviewSchema.post("save", function () {
-  this.constructor.calcAverageRatings(this.doctor);
-});
 
 export default mongoose.model("Review", reviewSchema);

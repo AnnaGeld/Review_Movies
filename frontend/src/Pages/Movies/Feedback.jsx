@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
+
 import { useState } from "react";
-import { reviews } from "../../../data/reviews.js";
+import { reviews } from "../../assets/data/reviews";
 import Reviews from "./Reviews.jsx";
 import FeedBackForm from "./FeedBackForm.jsx";
 

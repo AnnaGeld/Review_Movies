@@ -1,39 +1,90 @@
-import signupImg from "../assets/images/signup.gif";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from 'react'
 
-import avatar from "../assets/images/patient-avatar.png";
-import { useState } from "react";
-const Signup = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [previewURL, setPreviewURL] = useState("");
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    photo: selectedFile,
-    gender: "",
-    role: "patient",
-  });
+import { Container, Row, Col, Form, FormGroup, Button } from 'reactstrap'
+import { Link, useNavigate } from 'react-router-dom'
+import registerImg from '../assets/images/signup.gif'
+import userIcon from '../assets/images/user.png'
+import { AuthContext } from '../context/AuthContext.jsx'
+import "../App.css"
+import { BASE_URL } from '../Others/config'
 
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+const Register = () => {
+  const [credentials, setCredentials] = useState({
+      userName: undefined,
+      email: undefined,
+      password: undefined
+   })
 
-  const handleFileInputchange = async (event) => {
-    const file = event.target.files[0];
-    console.log(file);
-  };
+   const {dispatch} = useContext(AuthContext)
+   const navigate = useNavigate()
 
-  const submitHandler = async (event) => {
-    event.preventDefault();
-  };
-  return (
-    <section className="px-5 xl:px-0">
+   const handleChange = e => {
+      setCredentials(prev => ({ ...prev, [e.target.id]: e.target.value }))
+   }
+
+   const handleClick = async e => {
+      e.preventDefault()
+
+      try {
+         const res = await fetch(`${BASE_URL}/auth/register`, {
+            method:'post',
+            headers: {
+               'content-type':'application/json'
+            },
+            body: JSON.stringify(credentials)
+         })
+         const result = await res.json()
+
+         if(!res.ok) alert(result.message)
+
+         dispatch({type:'REGISTER_SUCCESS'})
+         navigate('/login')
+      } catch(err) {
+         alert(err.message)
+      }
+   }
+
+   return (
+        /* <section>
+         <Container>
+            <Row>
+               <Col lg='8' className='m-auto'>
+                  <div className="login__container d-flex justify-content-between">
+                     <div className="login__img">
+                        <img src={registerImg} alt="" />
+                     </div>
+
+                     <div className="login__form">
+                        <div className="user">
+                           <img src={userIcon} alt="" />
+                        </div>
+                        <h2>Register</h2>
+
+                        <Form onSubmit={handleClick}>
+                           <FormGroup>
+                              <input type="text" placeholder='Username' id='username' onChange={handleChange} required />
+                           </FormGroup>
+                           <FormGroup>
+                              <input type="email" placeholder='Email' id='email' onChange={handleChange} required />
+                           </FormGroup>
+                           <FormGroup>
+                              <input type="password" placeholder='Password' id='password' onChange={handleChange} required />
+                           </FormGroup>
+                           <Button className='btn secondary__btn auth__btn' type='submit'>Create Account</Button>
+                        </Form>
+                        <p>Already have an account? <Link to='/login'>Login</Link></p>
+                     </div>
+                  </div>
+               </Col>
+            </Row>
+         </Container>
+      </section>*/
+<section className="px-5 xl:px-0">
       <div className="max-w-[1170px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           <div className="hidden lg:block bg-primaryColor rounded-l-lg">
             <figure className="rounded-l-lg">
-              <img src={signupImg} alt="" className="w-full rounded-l-lg" />
+              <img src={registerImg} alt="" className="w-full rounded-l-lg" />
             </figure>
           </div>
 
@@ -42,69 +93,32 @@ const Signup = () => {
             <h3 className="text-black text-[22px] leading-9 font-bold mb-10">
               Create an <span className="text-primaryColor">account</span>
             </h3>
-            <form onSubmit={submitHandler}>
+            <form onSubmit={handleClick}>
               <div className="mb-5">
                 <input
-                  type="text"
-                  placeholder="Full Name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full py-4 border-b border-solid  border-[#006ff61] focus:outline-none focus:border-b-primaryColor text-[22px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
-                  required
+               className="w-full py-4 border-b border-solid  border-[#006ff61] focus:outline-none focus:border-b-primaryColor text-[22px] leading-7 text-black placeholder:text-textColor rounded-md cursor-pointer"
+
+                type="text" placeholder='Username' id='username' onChange={handleChange} required 
                 />
               </div>
               <div className="mb-5">
                 <input
-                  type="email"
-                  placeholder="Enter Your Email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full py-4 border-b border-solid  border-[#006ff61] focus:outline-none focus:border-b-primaryColor text-[22px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
+                className="w-full py-4 border-b border-solid  border-[#006ff61] focus:outline-none focus:border-b-primaryColor text-[22px] leading-7 text-black placeholder:text-textColor rounded-md cursor-pointer"
+
                   required
+                 type="email" placeholder='Email' id='email' onChange={handleChange}
+               
                 />
               </div>
               <div className="mb-5">
                 <input
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  className="w-full py-4 border-b border-solid  border-[#006ff61] focus:outline-none focus:border-b-primaryColor text-[22px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
-                  required
+               className="w-full py-4 border-b border-solid  border-[#006ff61] focus:outline-none focus:border-b-primaryColor text-[22px] leading-7 text-black placeholder:text-textColor rounded-md cursor-pointer"
+
+                 type="password" placeholder='Password' id='password' onChange={handleChange} required
                 />
               </div>
               <div className="mb-5 flex items-center justify-between">
-                
-                 
-                
-               
               </div>
-              <div className="mb-5 flex items-center gap-3">
-                <figure className="w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryColor flex items-center justify-center">
-                  <img src={avatar} alt="" className="w-full rounded-full" />
-                </figure>
-
-                <div className="relative w-[130px] h-[50px]">
-                  <input
-                    type="file"
-                    name="photo"
-                    onChange={handleFileInputchange}
-                    id="customFile"
-                    accept=".jpg, .png"
-                    className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer "
-                  />
-                  <label
-                    htmlFor="customFile"
-                    className="absolute top-0 left-0 w-full h-full flex items-center cursor-pointer px-[0.75rem] py-[0.375rem] text-[15px] leading-6 overflow-hidden bg-[#0066ff46] text-headingColor font-semibold rounded-lg truncate "
-                  >
-                    Upload Photo
-                  </label>
-                </div>
-              </div>
-
               <div className="mt-7">
                 <button
                   type="submit"
@@ -124,7 +138,13 @@ const Signup = () => {
         </div>
       </div>
     </section>
-  );
-};
+      
 
-export default Signup;
+   )
+}
+
+  
+
+ 
+
+export default Register

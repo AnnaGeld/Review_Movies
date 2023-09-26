@@ -1,4 +1,4 @@
-import user from "../src/assets/images/patient-avatar.png";
+import user from "../images/user.png";
 export const reviews = [
   {
     id: "01",

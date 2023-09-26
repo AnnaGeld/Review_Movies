@@ -7,7 +7,7 @@ const MovieCard = ({ movie }) => {
   const {
     id,
     name,
-    specialty,
+    type,
     avgRating,
     totalRating,
     photo,
@@ -24,7 +24,7 @@ const MovieCard = ({ movie }) => {
 
       <div className="mt-2 lg:mt-4 flex items-center justify-between">
         <span className="bg-[#CCF0F3] text-irisBlueColor text-[12px] lg:text-[16px] py-1 px-2 font-semibold rounded">
-          {specialty}
+          {type}
         </span>
         <div className="flex items-center gap-[6px]">
           <span className="flex items-center font-[700] text-headingColor gap-[6px] text-[14px] lg:text-[16px] leading-6 lg:leading-7 ">

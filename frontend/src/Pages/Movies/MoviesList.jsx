@@ -1,4 +1,4 @@
-import { movies } from "../../../data/movies";
+import { movies } from "../../assets/data/movies.js";
 import MovieCard from "./MovieCard.jsx";
 const MoviesList = () => {
   return (

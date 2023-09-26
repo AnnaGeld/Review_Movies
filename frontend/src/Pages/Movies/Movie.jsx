@@ -1,6 +1,7 @@
 import Testimonial from "../../Components/Testimonial/Testimonial";
-import { movies } from "../../../data/movies.js";
+import { movies } from "../../assets/data/movies.js";
 import MovieCard from "./MovieCard";
+
 const Movies = () => {
   return (
     <>

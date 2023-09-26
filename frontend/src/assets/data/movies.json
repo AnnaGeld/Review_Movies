@@ -1,0 +1,45 @@
+
+ 
+[
+
+  {
+    "name": "Rebel Moon",
+    "type": "Movie",
+    "avgRating": 4.8,
+    "totalRating": 272 ,
+    "date": "2023",
+    "genre": "Epic Space Opera",
+    "short": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, alias!",
+    "reviews": [],
+
+    "photo": "Img3"
+    
+  },
+  {
+    "name": "Extraction 2",
+    "type": "Movie",
+    "avgRating": 4.8,
+    "totalRating": 272 ,
+    "date": "2023",
+    "genre": "action",
+    "short": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, alias",
+    "reviews": [],
+
+    "photo": "Img2"
+    
+  },
+  {
+    "name": "Barbie",
+    "type": "Movie",
+    "avgRating": 4.8,
+    "totalRating": 272,
+    "date": "2023",
+    "genre": "Comedy",
+    "short": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, alias",
+    "reviews": [],
+
+    "photo": "Img1"
+    
+  }
+ 
+]

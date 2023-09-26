@@ -1,90 +1,75 @@
 import User from "../models/UserSchema.js";
-
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import { hashPassword } from "../helpers/helpAuth.js";
+import jwt from "jsonwebtoken";
 
-const generateToken = (user) => {
-  return jwt.sign(
-    { id: user._id, role: user.role },
-    process.env.JWT_SECRET_KEY,
-    {
-      expiresIn: "15d",
-    }
-  );
-};
-
+// user register
 export const register = async (req, res) => {
-  const { name, email, password, photo } = req.body;
   try {
-    // check if name was entered
-    if (!name) {
-      return res.json({
-        error: "name is required",
-      });
-    }
-    //check if password is good
-    if (!password) {
-      return res.json({
-        error: "password is required",
-      });
-    }
-    //check email
-    const exist = await User.findOne({ email });
-    if (exist) {
-      return res.json({
-        error: "Email is taken already",
-      });
-    }
-    //hashed password
-    const hashedPassword = await hashPassword(password);
+    //hashing password
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(req.body.password, salt);
 
-    //create user in database
-    const user = await User.create({
-      name,
-      email,
-      password: hashedPassword,
-      photo,
+    const newUser = new User({
+      username: req.body.username,
+      email: req.body.email,
+      password: hash,
+      photo: req.body.photo,
     });
 
-    await user.save();
-    res
-      .status(200)
-      .json({ success: true, message: "User Successfully created" });
+    await newUser.save();
 
-    return res.json(user);
-  } catch (error) {
-    res.status(500).json({ success: false, message: `error ${error}` });
-  }
-};
-
-export const login = async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(404).json({
-        error: "No user found",
-      });
-    }
-    const isPasswordMatch = await bcrypt.compare(password, user.password);
-    if (!isPasswordMatch) {
-      return res
-        .status(400)
-        .json({ status: false, message: "invalid credentials" });
-    }
-    //get token
-    const token = generateToken(user);
-
-    res.status(200).json({
-      status: true,
-      message: "Successfully Login",
-      token,
-      data: { email, password },
-    });
+    res.status(200).json({ success: true, message: "Successfully created!" });
   } catch (error) {
     res
       .status(500)
-      .json({ status: false, message: `failed to login ${error}` });
+      .json({ success: false, message: "Failed to create! Try again." });
+  }
+};
+
+// user login
+export const login = async (req, res) => {
+  try {
+    const email = req.body.email;
+    const user = await User.findOne({ email });
+
+    // if user doesn't exist
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found!" });
+    }
+
+    // if user is exist then check the passord or compare the password
+    const checkCorrectPassword = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+
+    // if password incorrect
+    if (!checkCorrectPassword) {
+      return res
+        .status(401)
+        .json({ susccess: false, message: "Incorrect email or password!" });
+    }
+
+    const { password, role, ...rest } = user._doc;
+
+    // create jwt token
+    const token = jwt.sign(
+      { id: user._id, role: user.role },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: "15d" }
+    );
+
+    // set token in the browser cookies and send the response to the client
+    res
+      .cookie("accessToken", token, {
+        httpOnly: true,
+        expires: token.expiresIn,
+      })
+      .status(200)
+      .json({ token, data: { ...rest }, role });
+  } catch (error) {
+    res.status(500).json({ susccess: false, message: "Failed to login" });
   }
 };

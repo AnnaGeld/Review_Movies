@@ -2,7 +2,7 @@ import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import patientAvatar from "../../assets/images/patient-avatar.png";
+import user from "../../assets/images/user.png";
 import { HiStar } from "react-icons/hi";
 const Testimonial = () => {
   return (
@@ -30,7 +30,7 @@ const Testimonial = () => {
         <SwiperSlide>
           <div className="py-[30px] px-5 rounded-[13px]">
             <div className="flex items-center gap-[13px]">
-              <img src={patientAvatar} alt="" />
+              <img src={user} alt="" />
               <div>
                 <h4 className="text-[18px] leading-[30px] font-semibold text-headingColor">
                   Yugesh Mandal
@@ -52,7 +52,7 @@ const Testimonial = () => {
         <SwiperSlide>
           <div className="py-[30px] px-5 rounded-[13px]">
             <div className="flex items-center gap-[13px]">
-              <img src={patientAvatar} alt="" />
+              <img src={user} alt="" />
               <div>
                 <h4 className="text-[18px] leading-[30px] font-semibold text-headingColor">
                   Tenzing
@@ -74,7 +74,7 @@ const Testimonial = () => {
         <SwiperSlide>
           <div className="py-[30px] px-5 rounded-[13px]">
             <div className="flex items-center gap-[13px]">
-              <img src={patientAvatar} alt="" />
+              <img src={user} alt="" />
               <div>
                 <h4 className="text-[18px] leading-[30px] font-semibold text-headingColor">
                   Lovepreet
@@ -96,7 +96,7 @@ const Testimonial = () => {
         <SwiperSlide>
           <div className="py-[30px] px-5 rounded-[13px]">
             <div className="flex items-center gap-[13px]">
-              <img src={patientAvatar} alt="" />
+              <img src={user} alt="" />
               <div>
                 <h4 className="text-[18px] leading-[30px] font-semibold text-headingColor">
                   Harshit
@@ -118,7 +118,7 @@ const Testimonial = () => {
         <SwiperSlide>
           <div className="py-[30px] px-5 rounded-[13px]">
             <div className="flex items-center gap-[13px]">
-              <img src={patientAvatar} alt="" />
+              <img src={user} alt="" />
               <div>
                 <h4 className="text-[18px] leading-[30px] font-semibold text-headingColor">
                   Saksham
