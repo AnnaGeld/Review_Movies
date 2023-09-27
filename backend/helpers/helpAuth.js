@@ -1,4 +1,4 @@
-import bcrypt from "bcryptjs";
+/*import bcrypt from "bcryptjs";
 
 export const hashPassword = (password) => {
   return new Promise((resolve, reject) => {
@@ -16,6 +16,6 @@ export const hashPassword = (password) => {
   });
 };
 
-/*const comparePassword = (password, hashed) => {
+const comparePassword = (password, hashed) => {
   return bcrypt.compare(password, hashed);
 };*/

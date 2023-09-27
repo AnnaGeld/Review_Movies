@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link, NavLink } from 'react-router-dom';
 import { BiMenu } from 'react-icons/bi';
 import { AuthContext } from '../context/AuthContext.jsx';
+
 
 const navLinks = [
   {
@@ -20,7 +21,8 @@ const Header = () => {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
   const { user, dispatch } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  
 
   const handleStickyHeader = () => {
     window.addEventListener('scroll', () => {
@@ -40,15 +42,13 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleStickyHeader);
   }, []);
 
-  const toggleMenu = () => {
+ const toggleMenu = () => {
     menuRef.current.classList.toggle('show__menu');
   };
 
   const handleLogout = () => {
-    
-    
     dispatch({ type: 'LOGOUT' });
-    navigate('/')
+    navigate('/');
   };
 
   return (
@@ -56,15 +56,15 @@ const Header = () => {
       <div className="container">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to='/'>
-            <div>
-              {/*<img src={logo} alt="" />*/}
-            </div>
+          <Link to="/">
+            <div>{/*<img src={logo} alt="" />*/}</div>
           </Link>
 
           {/* Menu */}
-          <div className="navigation" ref={menuRef} onClick={toggleMenu}>
-            <ul className="menu flex items-center gap-[2.7rem]">
+          <div onClick={toggleMenu}  className="navigation" ref={menuRef}>
+            <ul
+              className="menu flex items-center gap-[2.7rem]"
+            >
               {navLinks.map((link, index) => (
                 <li key={index}>
                   <NavLink

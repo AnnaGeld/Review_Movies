@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { movies } from "../../assets/data/movies.js";
 import starIcon from "../../assets/images/Star.png";
 import { BASE_URL } from '../../Others/config.js'
-import { Container, Row, Col, Form, ListGroup } from 'reactstrap'
+import {  ListGroup } from 'reactstrap'
 import { AuthContext } from '../../context/AuthContext.jsx'
 /*import MoviesAbout from "./MoviesAbout.jsx";
 import Feedback from "./Feedback.jsx";*/
@@ -49,7 +49,7 @@ reviews,
          const reviewObj = {
             username: user?.username,
             reviewText,
-            rating: tourRating
+            
          }
 
          const res = await fetch(`${BASE_URL}/review/${id}`, {
