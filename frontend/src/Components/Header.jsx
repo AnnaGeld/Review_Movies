@@ -1,9 +1,9 @@
-import "./style/Header.css"
-import logo from '../assets/images/logo.png';
-import userImg from '../assets/images/avatar-icon.png';
+import React, { useContext, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link, NavLink } from 'react-router-dom';
 import { BiMenu } from 'react-icons/bi';
-import { useEffect, useRef } from 'react';
+import { AuthContext } from '../context/AuthContext.jsx';
+
 const navLinks = [
   {
     path: '/home',
@@ -13,13 +13,14 @@ const navLinks = [
     path: '/movies',
     display: 'Find a Movie',
   },
- 
-  
+  // Add more navigation links as needed
 ];
 
 const Header = () => {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
+  const { user, dispatch } = useContext(AuthContext);
+  const navigate = useNavigate()
 
   const handleStickyHeader = () => {
     window.addEventListener('scroll', () => {
@@ -37,10 +38,17 @@ const Header = () => {
   useEffect(() => {
     handleStickyHeader();
     return () => window.removeEventListener('scroll', handleStickyHeader);
-  });
+  }, []);
 
   const toggleMenu = () => {
     menuRef.current.classList.toggle('show__menu');
+  };
+
+  const handleLogout = () => {
+    
+    
+    dispatch({ type: 'LOGOUT' });
+    navigate('/')
   };
 
   return (
@@ -49,9 +57,9 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to='/'>
-          <div>
-            <img src={logo} alt="" />
-          </div>
+            <div>
+              {/*<img src={logo} alt="" />*/}
+            </div>
           </Link>
 
           {/* Menu */}
@@ -76,19 +84,28 @@ const Header = () => {
 
           {/* nav Right */}
           <div className="flex items-center gap-4">
-            <div className="hidden">
-              <Link to="/">
-                <figure className="w-[35px] h-[35] rounded-full">
-                  <img src={userImg} className="w-full rounded-full" alt="" />
-                </figure>
+            {user ? (
+              // User is logged in
+              <div className="flex items-center gap-4">
+                <span className="text-textColor text-[16px] leading-7">
+                  Welcome, {user.email}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px] cursor-pointer"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              // User is not logged in
+              <Link to="/login">
+                <button className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]">
+                  Login
+                </button>
               </Link>
-            </div>
+            )}
 
-            <Link to="/login">
-              <button className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]">
-                Login
-              </button>
-            </Link>
             <span className="md:hidden" onClick={toggleMenu}>
               <BiMenu className="w-6 h-6 cursor-pointer text-white" />
             </span>
